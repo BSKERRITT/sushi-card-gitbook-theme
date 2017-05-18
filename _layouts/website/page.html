@@ -10,3 +10,26 @@
         {{super()}}
     </div>
 {% endblock %}
+
+{% block javascript %}
+    {{super()}}
+    <!-- Include Scratch JS -->
+    <script src="http://scratchblocks.github.io/js/scratchblocks-v3.1-min.js"></script>
+    <!-- Include Translations JS -->
+    <script src="http://scratchblocks.github.io/js/translations-all-v3.1-min.js"></script>
+    {% if book.scratchBlocksLang %}
+    <script>
+        // Call block level (pre / code or pre & code) scratch js
+        // scratchblocks.renderMatching("pre.blockGroup", {languages:['en', 'it']});
+        scratchblocks.renderMatching("pre.blockGroup", {languages:['{{ book.scratchBlocksLang }}']});
+        // Call Inline scratch js (code)
+        scratchblocks.renderMatching("code.scratch", {inline: true, languages:['{{ book.scratchBlocksLang }}']});
+    </script>
+    {% else %}
+    <script>
+        scratchblocks.renderMatching("pre.blockGroup", {languages:['en']});
+        // Call Inline scratch js (code)
+        scratchblocks.renderMatching("code.scratch", {inline: true, languages:['en']});
+    </script>
+    {% endif %}    
+{% endblock %}

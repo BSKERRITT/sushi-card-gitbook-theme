@@ -25,6 +25,23 @@ module.exports = {
           //send it back
           return output;
         }
+      },
+      // This block level code works to a point.
+      // It builds the scratchblock elements but will not recognise e.g '<touching [sprite 1 v]?>',
+      // angle brackets seem to not render. This is the same for in-line as well.
+      blockScratch: {
+        process: function (block) {
+          var output = "<pre class='blockGroup'>";
+          output += "<code class='scratch'>"+ block.body +"</code>";
+          output += "</pre>";
+          return output;
+        }
+      },
+      inlineScratch: {
+        process: function (block) {
+          var output = "<code class='scratch'>"+ block.body +"</code>";
+          return output;
+        }
       }
-    },
+    }
 };
